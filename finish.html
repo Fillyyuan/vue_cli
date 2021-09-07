@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>訂單確認 - 小春堂</title>
+  <link rel="icon" href="../images/index/logo_footer.png">
+  <link href="../css/finish.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.js"></script>
+  <script src="https://kit.fontawesome.com/8c3a8ab95b.js" crossorigin="anonymous"></script>
+  <script src="../js/finish_vue.js"></script>
+
+</head>
+
+<body>
+
+  <!-- ========== header ========== -->
+  <div id="cart_app">
+
+    <div class="navbar">
+      <div class="navbar-logo">
+        <a href="./homepage.html"><img src="../images/index/logo.png" alt=""></a>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========== main ========== -->
+  <div id="finish_app">
+    <div class="finish_container">
+
+      <!-- ========== 訂單處理階段 ========== -->
+      <div class="finish_stage">
+
+        <div class="finish_step finish_orderData">
+          <div>
+            <div class="finish_check">
+              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" data-prefix="fas"
+                data-icon="check" class="svg-inline--fa fa-check fa-w-16" role="img" viewBox="0 0 512 512">
+                <path fill="#ffffff"
+                  d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z" />
+              </svg>
+            </div>
+            <div class="finish_line1"></div>
+          </div>
+          <p>訂單資料</p>
+        </div>
+
+        <div class="finish_step finish_payment">
+          <div>
+            <div class="finish_check">
+              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" data-prefix="fas"
+                data-icon="check" class="svg-inline--fa fa-check fa-w-16" role="img" viewBox="0 0 512 512">
+                <path fill="#ffffff"
+                  d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z" />
+              </svg>
+            </div>
+            <div class="finish_line2"></div>
+          </div>
+          <p>付款資訊</p>
+        </div>
+
+        <div class="finish_step finish_confirm">
+          <div>
+            <div class="finish_check">
+              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" data-prefix="fas"
+                data-icon="check" class="svg-inline--fa fa-check fa-w-16" role="img" viewBox="0 0 512 512">
+                <path fill="#ffffff"
+                  d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z" />
+              </svg>
+            </div>
+          </div>
+          <p>訂單確認</p>
+        </div>
+        
+
+      </div>
+
+      <!-- ========== 訂單資料 ========== -->
+      <div class="finish_order">
+
+        <p>訂單完成！</p>
+        <p>謝謝您的訂購，我們會盡外處理您的訂單。</p>
+
+        <p>訂單編號：<span>{{orderer_data.order_number}}</span></p>
+
+        <p>姓名：<span class='finish_deliverName'>{{orderer_data.orderer_name}}</span></p>
+        <p>手機：<span class='finish_deliverPhone'>{{orderer_data.orderer_phone}}</span></p>
+        <p>地址：<span class='finish_deliverAddress'>{{orderer_data.orderer_address}}</span></p>
+        <p>運送方式：<span class='finish_deliveryType'>{{orderer_data.delivery_type}}</span></p>
+        <p>付款方式：<span class='finish_paymentType'>{{orderer_data.payment_type}}</span></p>
+
+      </div>
+
+
+
+
+      <!-- 訂購商品清單 -->
+      <div class="finish_list">
+
+        <div class="finish_title">訂購商品清單</div>
+        <div class="finish_itemTitle">
+          <div>商品名稱</div>
+          <div>數量</div>
+          <div>價格</div>
+        </div>
+
+        <!-- 商品清單 -->
+        <ul class="finish_itemList">
+
+          <li class="finish_item" v-for="(item,index) in itemList" id="item.id">
+            <div class="finish_data">
+              <div><img :src="item.img"></div>
+              <div>{{item.itemName}}</div>
+            </div>
+            <div>x {{item.quantity}}</div>
+            <div>${{item.price}}元</div>
+          </li>
+
+          <li class="finish_item" v-for="(item,index) in customization" id="item.id">
+            <div class="finish_data">
+              <div><img :src="item.img"></div>
+              <div>{{item.itemName}}</div>
+            </div>
+            <div>x {{item.quantity}}</div>
+            <div>${{item.price}}元</div>
+          </li>
+
+        </ul>
+
+        <!-- 金額細項 -->
+        <div class="finish_priceDetail">
+
+          <div class="finish_itemPrice">
+            <p>商品金額</p>
+            <p>${{itemPrice}}元</p>
+          </div>
+
+          <div class="finish_itemPrice">
+            <p>運費</p>
+            <p>${{shipping}}元</p>
+          </div>
+
+          <div class="finish_discount">
+            <p>折扣碼</p>
+            <p>-${{discount}}元</p>
+          </div>
+
+        </div>
+
+        <!-- 總金額 -->
+        <div class="finish_total">
+          <div>總金額</div>
+          <div>${{total_price}}元</div>
+        </div>
+
+      </div>
+
+
+      <div class="finish_btn">
+        <a href="./homepage.html">返回首頁</a>
+      </div>
+
+
+    </div>
+  </div>
+
+
+  <!-- =======================footer======================= -->
+  <div class="footer">
+    <div class="footer-left">
+      <div class='footer-policy'>
+        <p><a href="../page/privacy.html">隱私政策</a></p>
+        <p><a href="../page/terms.html">服務條款</a></p>
+      </div>
+    </div>
+    <div class='footer-media'>
+      <a href="https://www.instagram.com/"><i class="fab fa-instagram-square"></i></a>
+      <a href="https://www.facebook.com/"><i class="fab fa-facebook-square"></i></a>
+      <a href="https://twitter.com/?lang=zh-tw"><i class="fab fa-twitter-square"></i></a>
+    </div>
+    <div class="footer-right">
+      <p>本網站為緯育TibaMe前端設計工程師班第68期第三組學員專題成果作品，本平台僅供學習、展示之用。參考資源:snaq.me。若有侵權疑慮，您可以私訊[TibaMe-前端設計工程師養成班]，後續會由專人協助處理
+      </p>
+    </div>
+  </div>
+  <!-- =======================footer結束======================= -->
+
+
+</body>
+
+</html>
